@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "255455286291",
+    "project_id": "redditadroid",
+    "storage_bucket": "redditadroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255455286291:android:361575b8c5d54a4ffe9be6",
+        "android_client_info": {
+          "package_name": "com.example.redditadroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255455286291-uj64m18s8i4s83ajkethatbmrmnpd95c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNxLpP6MlloALKZdHApnjrsGQl64KzdUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255455286291-uj64m18s8i4s83ajkethatbmrmnpd95c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

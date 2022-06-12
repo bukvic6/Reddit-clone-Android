@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RedditAdroid</string>
+    <string name="username">Username</string>
+    <string name="Password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="signup">Sign up</string>
+    <string name="email">Email</string>
+    <string name="top">TOP</string>
+    <string name="newp">NEW</string>
+    <string name="page_title">REDDIT</string>
+    <string name="add">add</string>
+    <string name="lorem">It is a long established fact that a reader will be distracted
+        by the readable content of a page when looking at its layout. The point of us
+        ing Lorem Ipsum is that it has a more-or-less normal distribution</string>
+</resources>
