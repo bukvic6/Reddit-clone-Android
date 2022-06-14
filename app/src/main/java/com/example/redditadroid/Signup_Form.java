@@ -31,7 +31,7 @@ public class Signup_Form extends AppCompatActivity {
             finish();
             return;
         }
-        Button btnRegister = findViewById(R.id.registerbutton);
+        Button btnRegister = findViewById(R.id.signupbutton);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +66,7 @@ public class Signup_Form extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     User user = new User(username,email,password);
-                    FirebaseDatabase.getInstance().getReference("users")
+                    FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>(){
                                 @Override

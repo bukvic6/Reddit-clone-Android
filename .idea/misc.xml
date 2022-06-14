@@ -7,11 +7,12 @@
         <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2675" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2675" />
         <entry key="app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.2675" />
-        <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.11890243902439024" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/registration.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.18" />
       </map>

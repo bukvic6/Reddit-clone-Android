@@ -29,7 +29,7 @@ public class Login_form extends AppCompatActivity {
             finish();
             return;
         }
-        Button btnLogin = findViewById(R.id.loginButton);
+        Button btnLogin = findViewById(R.id.containedButton);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
