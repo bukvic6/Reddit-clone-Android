@@ -60,6 +60,11 @@ public class Signup_Form extends AppCompatActivity {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
             return;
         }
+
+        if (password.length() < 8){
+            Toast.makeText(this, "Password must be minimum 8 characters", Toast.LENGTH_LONG).show();
+            return;
+        }
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override

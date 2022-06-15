@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     PostAdapter postAdapter;
     ArrayList<Post> list;
+    Button createpost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        Button createPost = findViewById(R.id.addPostButton);
+        createPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(i);            }
+        });
         recyclerView = findViewById(R.id.postList);
         database = FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts");
         recyclerView.setHasFixedSize(true);
@@ -85,10 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-//
-
-
 
     }
 

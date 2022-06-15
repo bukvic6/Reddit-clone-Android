@@ -22,10 +22,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         this.context = context;
         this.list = list;
     }
-
-//    public PostAdapter(ArrayList<Post> list) {
-//    }
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

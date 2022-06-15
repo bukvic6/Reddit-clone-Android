@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "255455286291",
     "project_id": "redditadroid",
-    "storage_bucket": "redditadroid.appspot.com"
+    "storage_bucket": "redditadroid.appspot.com",
+    "firebase_url": "https://redditadroid-default-rtdb.firebaseio.com/"
   },
   "client": [
     {
