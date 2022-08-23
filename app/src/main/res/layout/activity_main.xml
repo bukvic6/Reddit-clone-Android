@@ -21,6 +21,13 @@
             android:text="addPost"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             />
+        <Button
+            android:id="@+id/userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Profile"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            />
 
         <TextView
             android:id="@+id/mainUsername"

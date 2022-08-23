@@ -12,4 +12,9 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(String textUsername, String textEmail) {
+        this.username = textUsername;
+        this.email = textEmail;
+    }
 }

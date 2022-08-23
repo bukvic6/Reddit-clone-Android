@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RedditAdroid" >
         <activity
+            android:name=".UpdateProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login_form"
             android:exported="false" />
         <activity
