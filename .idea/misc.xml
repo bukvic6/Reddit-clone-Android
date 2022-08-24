@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2675" />
         <entry key="app/src/main/res/drawable/ic_baseline_perm_identity_24.xml" value="0.2675" />
         <entry key="app/src/main/res/layout/activity_add.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_community.xml" value="0.11018518518518519" />
         <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />

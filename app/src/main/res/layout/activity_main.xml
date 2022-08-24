@@ -28,7 +28,17 @@
             android:text="User Profile"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             />
+        <Button
+            android:id="@+id/addCommunity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add community"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            />
 
+
+
+    </LinearLayout>
         <TextView
             android:id="@+id/mainUsername"
             android:layout_width="match_parent"
@@ -36,13 +46,13 @@
             android:text="Welcome user:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
      </LinearLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
