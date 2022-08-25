@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_community.xml" value="0.11018518518518519" />
+        <entry key="app/src/main/res/layout/activity_community.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/activity_community_list.xml" value="0.12685185185185185" />
         <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />

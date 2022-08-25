@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.redditadroid.model.Community;
@@ -16,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ListCommunity extends AppCompatActivity {
+public class ListCommunity extends AppCompatActivity implements RecViewInterface{
     RecyclerView recyclerView;
     DatabaseReference database;
     CommunityAdapter communityAdapter;
@@ -33,7 +34,7 @@ public class ListCommunity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        communityAdapter = new CommunityAdapter(this, list);
+        communityAdapter = new CommunityAdapter(this, list, this);
         recyclerView.setAdapter(communityAdapter);
         database.addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,5 +51,11 @@ public class ListCommunity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(ListCommunity.this, CommunityActivity.this);
+
     }
 }

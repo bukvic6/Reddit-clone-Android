@@ -15,12 +15,16 @@ import java.util.ArrayList;
 
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.CommunityViewHolder> {
 
+    private final RecViewInterface recViewInterface;
     Context context;
     ArrayList<Community> list;
 
-    public CommunityAdapter(Context context,ArrayList<Community> list){
+    public CommunityAdapter(Context context,ArrayList<Community> list,RecViewInterface recViewInterface){
+
         this.context = context;
         this.list = list;
+        this.recViewInterface = recViewInterface;
+
     }
 
     @NonNull
@@ -28,7 +32,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
     public CommunityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(context).inflate(R.layout.community,parent,false);
-        return new CommunityViewHolder(v);
+        return new CommunityViewHolder(v, recViewInterface);
     }
 
     @Override
@@ -45,9 +49,21 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.Comm
 
     public static class CommunityViewHolder extends RecyclerView.ViewHolder{
         TextView name;
-        public CommunityViewHolder(@NonNull View itemView) {
+        public CommunityViewHolder(@NonNull View itemView, RecViewInterface recViewInterface) {
             super(itemView);
             name = itemView.findViewById(R.id.communityName);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(recViewInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if(pos != RecyclerView.NO_POSITION){
+                            recViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
 
         }
     }
