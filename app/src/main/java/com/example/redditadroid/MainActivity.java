@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.redditadroid.model.Post;
 import com.example.redditadroid.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     PostAdapter postAdapter;
     ArrayList<Post> list;
+    ActionBar actionBar;
     Button createpost;
 
     @Override
@@ -44,6 +47,35 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        //ACTION BAR
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Home");
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.nav_comm:
+                    Intent i = new Intent(MainActivity.this, AddCommunityActivity.class);
+                    startActivity(i);
+                    break;
+                case R.id.profile:
+                    Intent f = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(f);
+                    break;
+                case R.id.home:
+                    Intent l = new Intent(MainActivity.this, ListCommunity.class);
+                    startActivity(l);
+                    break;
+            }
+            return true;
+
+
+        });
+
+
+
+
+
+        //TOP BAR
         Button createPost = findViewById(R.id.addPostButton);
         createPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }

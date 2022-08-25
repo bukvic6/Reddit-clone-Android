@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RedditAdroid">
         <activity
+            android:name=".ListCommunity"
+            android:exported="false" />
+        <activity
             android:name=".AddCommunityActivity"
             android:exported="false" />
         <activity
