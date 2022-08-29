@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.redditadroid.model.Post;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,9 @@ public class AddActivity extends AppCompatActivity {
     private EditText titleF,textF;
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        String id = getIntent().getStringExtra("ID");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         titleF = findViewById(R.id.titlePost);
@@ -57,18 +62,18 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Title must be minimum 8 characters", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Post post = new Post(title,text,user);
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                Post post = new Post(title,text,user,id);
+                FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").push()
+                        .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        databaseReference.child(post.getText()).setValue(post);
-                        Toast.makeText(AddActivity.this, "Post added..", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AddActivity.this,MainActivity.class));
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AddActivity.this,"Post crated",Toast.LENGTH_LONG).show();
                     }
-
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AddActivity.this, "Fail to add Course..", Toast.LENGTH_SHORT).show();
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddActivity.this,"Ohh nouzz",Toast.LENGTH_LONG).show();
+
 
                     }
                 });

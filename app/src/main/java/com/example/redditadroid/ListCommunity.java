@@ -21,6 +21,7 @@ public class ListCommunity extends AppCompatActivity implements RecViewInterface
     RecyclerView recyclerView;
     DatabaseReference database;
     CommunityAdapter communityAdapter;
+    Community community;
     ArrayList<Community> list;
 
 
@@ -55,7 +56,13 @@ public class ListCommunity extends AppCompatActivity implements RecViewInterface
 
     @Override
     public void onItemClick(int position) {
-        Intent intent = new Intent(ListCommunity.this, CommunityActivity.this);
-
+        Intent intent = new Intent(ListCommunity.this, CommunityActivity.class);
+        intent.putExtra("NAME", list.get(position).getName());
+        intent.putExtra("ID", list.get(position).getId());
+        startActivity(intent);
     }
+
+
+
+
 }

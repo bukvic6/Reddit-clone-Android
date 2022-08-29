@@ -1,7 +1,18 @@
 package com.example.redditadroid.model;
 
 public class Community {
+
+    String id;
     String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     String description;
 
     public String getUserId() {
@@ -10,7 +21,13 @@ public class Community {
 
     String userId;
 
-    public Community(String name, String text, String userId) {
+    public Community(String name, String description, String userId) {
+        this.name = name;
+        this.description = description;
+        this.userId = userId;
+    }
+    public Community(String id,String name, String description, String userId) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.userId = userId;

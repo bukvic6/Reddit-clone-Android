@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.redditadroid.model.Community;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,24 +54,43 @@ public class AddCommunityActivity extends AppCompatActivity {
                     Toast.makeText(AddCommunityActivity.this, "Description must be minimum 8 characters", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Community community = new Community(name, description, user);
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                String id = databaseReference.push().getKey();
+                Community community = new Community(id,name, description, user);
+                FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Communities").child(community.getId())
+                        .setValue(community).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        databaseReference.child(community.getName()).setValue(community);
-                        Toast.makeText(AddCommunityActivity.this, "Community created successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AddCommunityActivity.this, MainActivity.class));
-
-
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AddCommunityActivity.this,"Community crated",Toast.LENGTH_LONG).show();
                     }
-
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AddCommunityActivity.this, "Fail to add Community..", Toast.LENGTH_SHORT).show();
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddCommunityActivity.this,"Ohh nouzz",Toast.LENGTH_LONG).show();
 
 
                     }
                 });
+            //                databaseReference.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        databaseReference.child(community.getName()).setValue(community);
+//                        FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Communities")
+//                                .child(FIreb)
+//
+//                        Toast.makeText(AddCommunityActivity.this, "Community created successfully", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(AddCommunityActivity.this, MainActivity.class));
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        Toast.makeText(AddCommunityActivity.this, "Fail to add Community..", Toast.LENGTH_SHORT).show();
+//
+//
+//                    }
+//                });
             }
         });
         Button btnBa = findViewById(R.id.btnBack);

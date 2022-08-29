@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommunityActivity"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/CommName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Community:"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
+    <Button
+        android:id="@+id/addPostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="addPost"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>
