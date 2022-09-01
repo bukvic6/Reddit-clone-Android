@@ -62,8 +62,9 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Title must be minimum 8 characters", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Post post = new Post(title,text,user,id);
-                FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").push()
+                String id = databaseReference.push().getKey();
+                Post post = new Post(id,title,text,user,id);
+                FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").child(post.getId())
                         .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

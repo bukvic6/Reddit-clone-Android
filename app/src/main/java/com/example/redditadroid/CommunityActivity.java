@@ -10,15 +10,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.redditadroid.model.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CommunityActivity extends AppCompatActivity {
     PostAdapter postAdapter;
@@ -35,15 +38,15 @@ public class CommunityActivity extends AppCompatActivity {
 
         TextView nametext = findViewById(R.id.CommName);
         nametext.setText(name);
-
         recyclerView = findViewById(R.id.postList);
         database = FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts");
+        Query query = database.orderByChild("communityId").equalTo(id);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         postAdapter = new PostAdapter(this, list);
         recyclerView.setAdapter(postAdapter);
-        database.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -58,6 +61,9 @@ public class CommunityActivity extends AppCompatActivity {
 
             }
         });
+
+
+
         Button createPost = findViewById(R.id.addPostButton);
         createPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,4 +80,5 @@ public class CommunityActivity extends AppCompatActivity {
 
 
     }
+
 }

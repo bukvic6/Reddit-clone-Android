@@ -4,12 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditadroid.model.Post;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public PostAdapter(Context context, ArrayList<Post> list) {
         this.context = context;
         this.list = list;
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
     @NonNull
     @Override
@@ -32,9 +36,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
+
+
         Post post = list.get(position);
         holder.title.setText(post.getTitle());
         holder.text.setText(post.getText());
+
 
     }
 
@@ -45,6 +52,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public static class PostViewHolder extends RecyclerView.ViewHolder{
         TextView title,text;
+        Button likeBtn;
 
         public PostViewHolder(@NonNull View postView){
             super(postView);
