@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 if(user != null){
                     usernameM.setText("Username: " + user.username);
                 }
-
             }
 
             @Override

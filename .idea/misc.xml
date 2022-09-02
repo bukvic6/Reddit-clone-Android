@@ -17,17 +17,20 @@
         <entry key="app/src/main/res/layout/activity_community_list.xml" value="0.12685185185185185" />
         <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1864951768488746" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/my_post.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/post.xml" value="0.2" />
         <entry key="app/src/main/res/layout/registration.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.18" />
         <entry key="app/src/main/res/menu/menu_nav.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/profile_nav.xml" value="0.1" />
       </map>
     </option>
   </component>

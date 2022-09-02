@@ -8,7 +8,7 @@
         android:title="Profile"
         android:icon="@drawable/ic_baseline_perm_identity_24"/>
     <item android:id="@+id/home"
-        android:title="Profile"
+        android:title="Communities"
         android:icon="@drawable/ic_action_name"/>
 
 </menu>

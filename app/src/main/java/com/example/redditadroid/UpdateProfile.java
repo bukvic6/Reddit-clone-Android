@@ -72,8 +72,6 @@ public class UpdateProfile extends AppCompatActivity {
                 truOldPass = textNewPass;
             } else {
                 Toast.makeText(UpdateProfile.this, "", Toast.LENGTH_LONG).show();
-
-
             }
             FirebaseDatabase database = FirebaseDatabase.getInstance();
 
