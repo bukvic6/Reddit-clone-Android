@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/addPostButton"
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="addPost"
+            android:text="Log out"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             />
         <Button

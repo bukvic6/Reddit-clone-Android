@@ -25,8 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    private EditText usernameEdit, emailEdit;
-    private String textUsername, textEmail;
+    private EditText usernameEdit, emailEdit ,oldPassword, newPassword;
+    private String textUsername, textEmail, textOldPass,textNewPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,8 @@ public class UpdateProfile extends AppCompatActivity {
 
         usernameEdit = findViewById(R.id.editText_updateProfile_username);
         emailEdit = findViewById(R.id.editText_updateProfile_email);
+        oldPassword = findViewById(R.id.oldPassword);
+        newPassword = findViewById(R.id.newPassword);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         showProfile(currentUser);
@@ -48,7 +50,6 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
     }
-
     private void updateProfile(FirebaseUser currentUser) {
         if(TextUtils.isEmpty(textUsername)){
             Toast.makeText(UpdateProfile.this, "Please Enter Username", Toast.LENGTH_LONG).show();
@@ -61,7 +62,10 @@ public class UpdateProfile extends AppCompatActivity {
         } else{
             textUsername = usernameEdit.getText().toString();
             textEmail = emailEdit.getText().toString();
-            User write = new User(textUsername,textEmail);
+            textOldPass = oldPassword.getText().toString();
+            textNewPass = newPassword.getText().toString();
+
+            User write = new User(textUsername,textEmail,currentUser);
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
             reference.setValue(write).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -71,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
         //TOP BAR
-        Button createPost = findViewById(R.id.addPostButton);
-        createPost.setOnClickListener(new View.OnClickListener() {
+
+        Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(i);            }
+                auth.signOut();
+                Intent i = new Intent(MainActivity.this, Login_form.class);
+                startActivity(i);
+            }
         });
 
         Button createCommunity = findViewById(R.id.addCommunity);

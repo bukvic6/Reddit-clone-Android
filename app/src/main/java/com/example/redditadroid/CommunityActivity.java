@@ -29,6 +29,8 @@ public class CommunityActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference database;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +42,12 @@ public class CommunityActivity extends AppCompatActivity {
         nametext.setText(name);
         recyclerView = findViewById(R.id.postList);
         database = FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts");
-        Query query = database.orderByChild("communityId").equalTo(id);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         list = new ArrayList<>();
-        postAdapter = new PostAdapter(this, list);
-        recyclerView.setAdapter(postAdapter);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Post post = dataSnapshot.getValue(Post.class);
-                    list.add(post);
-                }
-                postAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
+        loadPosts(id);
 
         Button createPost = findViewById(R.id.addPostButton);
         createPost.setOnClickListener(new View.OnClickListener() {
@@ -70,15 +55,33 @@ public class CommunityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(CommunityActivity.this, AddActivity.class);
                 i.putExtra("ID", id);
-
-
-
                 startActivity(i);
             }
         });
 
 
 
+    }
+    private void loadPosts(String id) {
+        Query query = database.orderByChild("communityId").equalTo(id);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Post post = dataSnapshot.getValue(Post.class);
+                    list.add(post);
+                }
+                postAdapter = new PostAdapter(CommunityActivity.this, list);
+                recyclerView.setAdapter(postAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
 }
