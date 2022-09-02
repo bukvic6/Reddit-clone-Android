@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class UpdateProfile extends AppCompatActivity {
 
     private EditText usernameEdit, emailEdit ,oldPassword, newPassword;
-    private String textUsername, textEmail, textOldPass,textNewPass;
+    private String textUsername, textEmail, truOldPass,textOldPassword,textNewPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +55,31 @@ public class UpdateProfile extends AppCompatActivity {
             Toast.makeText(UpdateProfile.this, "Please Enter Username", Toast.LENGTH_LONG).show();
             usernameEdit.setError("Username is required");
             usernameEdit.requestFocus();
-        } else if (TextUtils.isEmpty(textEmail)){
+        }
+        else if (TextUtils.isEmpty(textEmail)){
             Toast.makeText(UpdateProfile.this, "Please Enter email", Toast.LENGTH_LONG).show();
             emailEdit.setError("Email is required");
             emailEdit.requestFocus();
         } else{
             textUsername = usernameEdit.getText().toString();
             textEmail = emailEdit.getText().toString();
-            textOldPass = oldPassword.getText().toString();
+            textOldPassword = oldPassword.getText().toString();
             textNewPass = newPassword.getText().toString();
 
-            User write = new User(textUsername,textEmail,currentUser);
+
+            if (textOldPassword.equals(truOldPass)){
+                Toast.makeText(UpdateProfile.this, "Password updated", Toast.LENGTH_LONG).show();
+                truOldPass = textNewPass;
+            } else {
+                Toast.makeText(UpdateProfile.this, "", Toast.LENGTH_LONG).show();
+
+
+            }
             FirebaseDatabase database = FirebaseDatabase.getInstance();
+
             DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
+
+            User write = new User(textUsername,textEmail,truOldPass);
             reference.setValue(write).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -89,17 +101,12 @@ public class UpdateProfile extends AppCompatActivity {
                             throw task.getException();
                         } catch (Exception e){
                             Toast.makeText(UpdateProfile.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
                         }
                     }
                 }
             });
-
-
         }
-
     }
-
     private void showProfile(FirebaseUser currentUser){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -111,6 +118,8 @@ public class UpdateProfile extends AppCompatActivity {
                 User userProfile = snapshot.getValue(User.class);
                 textUsername = userProfile.username;
                 textEmail = userProfile.email;
+                truOldPass = userProfile.password;
+
 
                 emailEdit.setText(textEmail);
                 usernameEdit.setText(textUsername);
