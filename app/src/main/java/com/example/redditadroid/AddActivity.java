@@ -28,7 +28,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText titleF,textF;
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        String id = getIntent().getStringExtra("ID");
+        String communityid = getIntent().getStringExtra("ID");
 
 
         super.onCreate(savedInstanceState);
@@ -63,7 +63,8 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
                 String id = databaseReference.push().getKey();
-                Post post = new Post(id,title,text,user,id);
+                String reaction = "0";
+                Post post = new Post(id,title,text,user,communityid,reaction);
                 FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").child(post.getId())
                         .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

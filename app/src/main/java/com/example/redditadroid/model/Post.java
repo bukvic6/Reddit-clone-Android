@@ -9,6 +9,23 @@ public class  Post {
     String reaction;
     String communityId;
 
+    public Post(String id, String title, String text, String user, String communityId, String reaction) {
+        this.title = title;
+        this.id = id;
+        this.text = text;
+        this.userId = user;
+        this.reaction = reaction;
+        this.communityId = communityId;
+    }
+
+    public String getReaction() {
+        return reaction;
+    }
+
+    public void setReaction(String reaction) {
+        this.reaction = reaction;
+    }
+
     public String getId() {
         return id;
     }
@@ -35,15 +52,8 @@ public class  Post {
 
     String userId;
 
-    public Post(String id,String title, String text, String userId, String communityId, String reaction) {
-        this.title = title;
-        this.id = id;
-        this.text = text;
-        this.userId = userId;
-        this.reaction = reaction;
-        this.communityId = communityId;
-    }
-    public Post(String id,String title, String text, String userId, String communityId) {
+
+    public Post(String title, String text, String userId, String communityId) {
         this.title = title;
         this.id = id;
         this.text = text;

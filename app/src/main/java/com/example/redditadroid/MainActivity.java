@@ -70,11 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-
-
-
-
         //TOP BAR
         Button createPost = findViewById(R.id.addPostButton);
         createPost.setOnClickListener(new View.OnClickListener() {
@@ -103,25 +98,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        postAdapter = new PostAdapter( this,list);
-        recyclerView.setAdapter(postAdapter);
-        database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Post post = dataSnapshot.getValue(Post.class);
-                    list.add(post);
-                }
-                postAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
+        loadPosts();
         usernameM = findViewById(R.id.mainUsername);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
@@ -143,6 +120,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void loadPosts() {
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Post post = dataSnapshot.getValue(Post.class);
+                    list.add(post);
+                }
+                postAdapter = new PostAdapter(MainActivity.this, list);
+                recyclerView.setAdapter(postAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
 
 
 }

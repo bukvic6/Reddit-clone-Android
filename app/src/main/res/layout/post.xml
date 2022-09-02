@@ -64,6 +64,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -73,6 +74,13 @@
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/like"
+                />
+            <TextView
+                android:id="@+id/reaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="200"
                 />
             <Button
                 android:layout_width="wrap_content"
