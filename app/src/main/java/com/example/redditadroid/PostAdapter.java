@@ -101,7 +101,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 else {
                     holder.likeBtn.setText("Like");
 
-
                 }
 
             }
