@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,14 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyPostView
 
             }
         });
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UpdatePostActivity.class);
+                intent.putExtra("postId", pID);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -82,7 +91,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyPostView
 
     class MyPostViewHolder extends RecyclerView.ViewHolder{
         TextView title,text, reaction;
-        Button likeBtn,deleteBtn;
+        Button likeBtn,deleteBtn,updateBtn;
 
         public MyPostViewHolder(@NonNull View postView){
             super(postView);
@@ -91,6 +100,7 @@ public class MyPostAdapter extends RecyclerView.Adapter<MyPostAdapter.MyPostView
             reaction = postView.findViewById(R.id.reaction);
             likeBtn = postView.findViewById(R.id.btnLike);
             deleteBtn = postView.findViewById(R.id.deletePost);
+            updateBtn = postView.findViewById(R.id.updatePost);
         }
     }
 
