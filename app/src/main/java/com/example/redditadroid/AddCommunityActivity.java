@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.redditadroid.model.Community;
+import com.example.redditadroid.model.Rules;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 public class AddCommunityActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = db.getReference("Communities");
-    private EditText nameF, descriptionF;
+    private EditText nameF, descriptionF, rulesF;
+    private DatabaseReference reactionRefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,10 @@ public class AddCommunityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_community);
         nameF = findViewById(R.id.communityName);
         descriptionF = findViewById(R.id.communityDescription);
+        rulesF = findViewById(R.id.communityRules);
         FirebaseAuth auth = FirebaseAuth.getInstance();
+        reactionRefs = FirebaseDatabase.getInstance().getReference().child("Rules");
+
         FirebaseUser currentUser = auth.getCurrentUser();
         String user = currentUser.getUid();
         Button btnCreate = findViewById(R.id.btnCreateComm);
@@ -42,6 +47,7 @@ public class AddCommunityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = nameF.getText().toString();
                 String description = descriptionF.getText().toString();
+                String rules = rulesF.getText().toString();
                 if (name.isEmpty() || description.isEmpty()) {
                     Toast.makeText(AddCommunityActivity.this, "Please fill all fields", Toast.LENGTH_LONG).show();
                     return;
@@ -71,33 +77,24 @@ public class AddCommunityActivity extends AppCompatActivity {
 
                     }
                 });
-            //                databaseReference.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        databaseReference.child(community.getName()).setValue(community);
-//                        FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Communities")
-//                                .child(FIreb)
-//
-//                        Toast.makeText(AddCommunityActivity.this, "Community created successfully", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(AddCommunityActivity.this, MainActivity.class));
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        Toast.makeText(AddCommunityActivity.this, "Fail to add Community..", Toast.LENGTH_SHORT).show();
-//
-//
-//                    }
-//                });
-            }
-        });
-        Button btnBa = findViewById(R.id.btnBack);
-        btnBa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToHome();
+                Rules rule = new Rules(rules);
+                reactionRefs.child(community.getId()).setValue(rule).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AddCommunityActivity.this,"Rules added",Toast.LENGTH_LONG).show();
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddCommunityActivity.this,"Ohh noo",Toast.LENGTH_LONG).show();
+
+
+                    }
+                });
+
+
             }
         });
     }

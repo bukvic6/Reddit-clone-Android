@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_update_community.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.17094017094017094" />

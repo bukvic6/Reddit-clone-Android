@@ -55,7 +55,7 @@
                 android:background="@android:color/transparent"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:text="delete"
+                android:text="Update"
                 android:drawablePadding="5dp"
                 />
 

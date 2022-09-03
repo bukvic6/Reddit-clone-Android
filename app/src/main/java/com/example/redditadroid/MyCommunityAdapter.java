@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,16 +72,21 @@ public class MyCommunityAdapter extends RecyclerView.Adapter<MyCommunityAdapter.
 
                             }
                         });
-
-
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
+            }
+        });
+        holder.updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UpdateCommunity.class);
+                intent.putExtra("communityId", cId);
+                context.startActivity(intent);
+
             }
         });
     }

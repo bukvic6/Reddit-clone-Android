@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".UpdateCommunity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/updateComm"
+        android:text="Update community"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:textColor="#E94B1B"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <EditText
+        android:id="@+id/updateCommName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Community name"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+    <EditText
+        android:id="@+id/updateCommunityDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Description"
+        android:minHeight="150dp"
+        android:gravity="start"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    <EditText
+        android:id="@+id/updateCommunityRules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Community rules"
+        android:minHeight="250dp"
+        android:gravity="start"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCreateComm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/create"
+            android:backgroundTint="@color/design_default_color_primary"
+            />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
