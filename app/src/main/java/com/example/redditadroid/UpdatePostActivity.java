@@ -68,7 +68,6 @@ public class UpdatePostActivity extends AppCompatActivity {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
 
             DatabaseReference reference = database.getReference("Posts");
-            Post write = new Post(postId,titleText,textText,UserId,CommunityId,textReaction);
             Map<String, Object> map = new HashMap<>();
             map.put("id", postId);
             map.put("title", titleText);

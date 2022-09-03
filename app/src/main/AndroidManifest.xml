@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RedditAdroid">
         <activity
+            android:name=".UpdateCommunity"
+            android:exported="false" />
+        <activity
             android:name=".UpdatePostActivity"
             android:exported="false" />
         <activity

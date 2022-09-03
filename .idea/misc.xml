@@ -23,9 +23,10 @@
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.17094017094017094" />
         <entry key="app/src/main/res/layout/community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/my_community.xml" value="0.22" />
         <entry key="app/src/main/res/layout/my_post.xml" value="0.2" />
         <entry key="app/src/main/res/layout/post.xml" value="0.2" />
         <entry key="app/src/main/res/layout/registration.xml" value="0.1276595744680851" />

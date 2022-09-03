@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserCommunity">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_communities_recView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    tools:context=".UpdateCommunity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
