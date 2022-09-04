@@ -96,13 +96,9 @@ public class ProfileActivity extends AppCompatActivity {
                     assert value != null;
                     int total = Integer.parseInt(value);
                     sum = sum +total;
-
                 }
                 karmaView.setText(String.valueOf(sum));
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

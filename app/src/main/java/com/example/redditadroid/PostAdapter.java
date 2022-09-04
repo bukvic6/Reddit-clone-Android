@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -142,6 +143,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 });
             }}
         });
+        holder.comm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,PostActivity.class);
+                intent.putExtra("postId", pId);
+                context.startActivity(intent);
+
+            }
+        });
     }
     private void setReaction(final PostViewHolder holder,final String postId) {
         reactionRefs.addValueEventListener(new ValueEventListener() {
@@ -172,7 +182,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
      class PostViewHolder extends RecyclerView.ViewHolder{
         TextView title,text, reaction;
-        Button upVote,downVote;
+        Button upVote,downVote, comm;
 
         public PostViewHolder(@NonNull View postView){
             super(postView);
@@ -181,6 +191,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             reaction = postView.findViewById(R.id.reaction);
             upVote = postView.findViewById(R.id.btnUpvote);
             downVote = postView.findViewById(R.id.downVote);
+            comm = postView.findViewById(R.id.comments);
         }
     }
 }

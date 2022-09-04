@@ -39,8 +39,6 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         String communityid = getIntent().getStringExtra("ID");
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         titleF = findViewById(R.id.titlePost);
