@@ -27,13 +27,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView greetingTextView,emailView,usernameView;
+    private TextView greetingTextView,emailView,usernameView,karmaView;
     Button button;
     ActionBar actionBar;
     MyPostAdapter postAdapter;
     ArrayList<Post> list;
     RecyclerView recyclerView;
     DatabaseReference database;
+    private DatabaseReference postRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         greetingTextView = findViewById(R.id.greeting);
         emailView = findViewById(R.id.emailAddress);
         usernameView = findViewById(R.id.username);
+        karmaView = findViewById(R.id.karma);
 
 
         // RECYCLER VIEW
@@ -79,7 +82,32 @@ public class ProfileActivity extends AppCompatActivity {
         // ADD VALUE TO TEXTVIEW
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
+        postRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        postRef.orderByChild("userId").equalTo(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int sum = 0;
+
+                for(DataSnapshot data: snapshot.getChildren()){
+                    String value = data.child("reaction").getValue(String.class);
+                    assert value != null;
+                    int total = Integer.parseInt(value);
+                    sum = sum +total;
+
+                }
+                karmaView.setText(String.valueOf(sum));
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
