@@ -43,6 +43,13 @@ public class Login_form extends AppCompatActivity {
                 switchToRegisterForm();
             }
         });
+        TextView switchToMainPage =  findViewById(R.id.switchToMainPage);
+        switchToMainPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMainForm();
+            }
+        });
     }
     private void authenticateUser(){
         EditText emailF = findViewById(R.id.logEmail);
@@ -60,7 +67,7 @@ public class Login_form extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-                            showMainForm();
+                            switchToRegisterForm();
                         } else {
                             Toast.makeText(Login_form.this, "Email or pass incorect",
                                     Toast.LENGTH_SHORT).show();

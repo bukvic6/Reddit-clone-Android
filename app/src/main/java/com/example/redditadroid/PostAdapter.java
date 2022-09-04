@@ -61,7 +61,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.reaction.setText(reaction);
         setReaction(holder, pId);
 
-        holder.likeBtn.setOnClickListener(new View.OnClickListener() {
+        holder.upVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int pReaction = Integer.parseInt(list.get(holder.getAdapterPosition()).getReaction());
@@ -71,14 +71,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(processLike){
-                            if(snapshot.child(postId).hasChild(user)){
+                            if(snapshot.child(postId).child(user).getValue() == "DOWNVOTE"){
+                                postRef.child(postId).child("reaction").setValue("" +(pReaction+2));
+                                reactionRefs.child(postId).child(user).setValue("UPVOTE");
+                                processLike = false;
+                            }else if(snapshot.child(postId).child(user).getValue() == "UPVOTE"){
                                 postRef.child(postId).child("reaction").setValue("" +(pReaction-1));
                                 reactionRefs.child(postId).child(user).removeValue();
                                 processLike = false;
                             }
                             else{
                                 postRef.child(postId).child("reaction").setValue("" +(pReaction+1));
-                                reactionRefs.child(postId).child(user).setValue("Liked");
+                                reactionRefs.child(postId).child(user).setValue("UPVOTE");
                                 processLike = false;
                             }
                         }
@@ -90,16 +94,52 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 })
 ;            }
         });
+        holder.downVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int pReaction = Integer.parseInt(list.get(holder.getAdapterPosition()).getReaction());
+                processLike = true;
+                final String postId = list.get(holder.getAdapterPosition()).getId();
+                reactionRefs.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(processLike){
+                            if(snapshot.child(postId).child(user).getValue() == "DOWNVOTE"){
+                                postRef.child(postId).child("reaction").setValue("" +(pReaction+1));
+                                reactionRefs.child(postId).child(user).removeValue();
+                                processLike = false;
+                            }else if(snapshot.child(postId).child(user).getValue() == "UPVOTE"){
+                                postRef.child(postId).child("reaction").setValue("" +(pReaction-2));
+                                reactionRefs.child(postId).child(user).setValue("DOWNVOTE");
+                                processLike = false;
+                            }
+                            else{
+                                postRef.child(postId).child("reaction").setValue("" +(pReaction-1));
+                                reactionRefs.child(postId).child(user).setValue("DOWNVOTE");
+                                processLike = false;
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
     private void setReaction(final PostViewHolder holder,final String postId) {
         reactionRefs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(postId).hasChild(user)){
-                    holder.likeBtn.setText("Liked");
+                if (snapshot.child(postId).child(user).getValue() == "Dislike"){
+                    holder.downVote.setText("DownVoted");
+                }else if(snapshot.child(postId).child(user).getValue() == "Liked"){
+                    holder.upVote.setText("Liked");
                 }
                 else {
-                    holder.likeBtn.setText("Like");
+                    holder.upVote.setText("Like");
+                    holder.downVote.setText("DownVote");
 
                 }
 
@@ -119,14 +159,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
      class PostViewHolder extends RecyclerView.ViewHolder{
         TextView title,text, reaction;
-        Button likeBtn;
+        Button upVote,downVote;
 
         public PostViewHolder(@NonNull View postView){
             super(postView);
             title = postView.findViewById(R.id.postTitle);
             text = postView.findViewById(R.id.postText);
             reaction = postView.findViewById(R.id.reaction);
-            likeBtn = postView.findViewById(R.id.btnLike);
+            upVote = postView.findViewById(R.id.btnUpvote);
+            downVote = postView.findViewById(R.id.downVote);
         }
     }
 }

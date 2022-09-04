@@ -25,6 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 public class AddActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference  = db.getReference("Posts");
+    DatabaseReference reactionReference  = db.getReference("Reaction");
+
+
     private EditText titleF,textF;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -63,20 +66,21 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
                 String id = databaseReference.push().getKey();
-                String reaction = "0";
+                String reaction = "1";
                 Post post = new Post(id,title,text,user,communityid,reaction);
                 FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").child(post.getId())
                         .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        reactionReference.child(id).child(user).setValue("Liked");
+
+
                         Toast.makeText(AddActivity.this,"Post crated",Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddActivity.this,"Ohh nouzz",Toast.LENGTH_LONG).show();
-
-
                     }
                 });
             }

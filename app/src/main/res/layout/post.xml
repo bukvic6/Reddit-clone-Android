@@ -64,13 +64,13 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/btnLike"
+                android:id="@+id/btnUpvote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/like"
-                android:text="LIKE"
+                android:text="UPVOTE"
                 android:textColor="@color/black"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/like"
@@ -83,13 +83,14 @@
                 android:text="200"
                 />
             <Button
+                android:id="@+id/downVote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/dislike"
                 android:textColor="@color/black"
-                android:text="DISLIKE"
+                android:text="DOWNVOTE"
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/dislike"
                 />
