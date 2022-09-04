@@ -28,6 +28,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     TextView usernameM;
+    private FirebaseAuth auth;
+
     RecyclerView recyclerView;
     DatabaseReference database;
     PostAdapter postAdapter;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser == null){
             Intent intent = new Intent(this, Login_form.class);
@@ -47,6 +49,24 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        FirebaseDatabase databasef = FirebaseDatabase.getInstance();
+        DatabaseReference reference = databasef.getReference("users").child(currentUser.getUid());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if(user != null){
+                    usernameM.setText("Username: " + user.username);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         //ACTION BAR
         actionBar = getSupportActionBar();
         actionBar.setTitle("Home");
@@ -103,22 +123,7 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
         loadPosts();
         usernameM = findViewById(R.id.mainUsername);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                if(user != null){
-                    usernameM.setText("Username: " + user.username);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
     }
 

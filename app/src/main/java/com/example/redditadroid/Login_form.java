@@ -67,7 +67,7 @@ public class Login_form extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-                            switchToRegisterForm();
+                            showMainForm();
                         } else {
                             Toast.makeText(Login_form.this, "Email or pass incorect",
                                     Toast.LENGTH_SHORT).show();

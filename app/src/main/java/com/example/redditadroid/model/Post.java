@@ -2,20 +2,33 @@ package com.example.redditadroid.model;
 
 import com.example.redditadroid.CommunityActivity;
 
+import java.time.LocalDate;
+
 public class  Post {
     String id;
     String title;
     String text;
     String reaction;
     String communityId;
+    String creationDate;
 
-    public Post(String id, String title, String text, String user, String communityId, String reaction) {
+
+    public Post(String id, String title, String text, String user, String communityId, String reaction, String creationDate) {
         this.title = title;
         this.id = id;
         this.text = text;
         this.userId = user;
         this.reaction = reaction;
         this.communityId = communityId;
+        this.creationDate = creationDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getReaction() {
@@ -53,13 +66,7 @@ public class  Post {
     String userId;
 
 
-    public Post(String title, String text, String userId, String communityId) {
-        this.title = title;
-        this.id = id;
-        this.text = text;
-        this.userId = userId;
-        this.communityId = communityId;
-    }
+
     public Post(){}
 
     public String getTitle() {

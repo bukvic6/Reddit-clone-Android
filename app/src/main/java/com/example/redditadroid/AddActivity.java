@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.redditadroid.model.Post;
@@ -21,6 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -49,8 +56,6 @@ public class AddActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 String title = titleF.getText().toString();
                 String text = textF.getText().toString();
                 if (title.isEmpty() || text.isEmpty()) {
@@ -65,9 +70,12 @@ public class AddActivity extends AppCompatActivity {
                     Toast.makeText(AddActivity.this, "Title must be minimum 8 characters", Toast.LENGTH_LONG).show();
                     return;
                 }
+                Calendar calendar = Calendar.getInstance();
+                String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
                 String id = databaseReference.push().getKey();
                 String reaction = "1";
-                Post post = new Post(id,title,text,user,communityid,reaction);
+                Post post = new Post(id,title,text,user,communityid,reaction,dateNow);
+
                 FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts").child(post.getId())
                         .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

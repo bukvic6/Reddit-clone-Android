@@ -51,6 +51,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+        <TextView
+            android:id="@+id/AlertTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alert Recieved"
+            android:visibility="invisible"/>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
@@ -62,6 +68,7 @@
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
      </LinearLayout>
+
 
 
 

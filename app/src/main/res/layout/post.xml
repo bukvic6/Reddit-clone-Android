@@ -94,9 +94,9 @@
                 android:drawablePadding="5dp"
                 android:drawableStart="@drawable/dislike"
                 />
+
+
         </LinearLayout>
-
-
 
 
     </LinearLayout>
