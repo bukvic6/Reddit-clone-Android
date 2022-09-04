@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditadroid.model.Post;
@@ -26,18 +27,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     Context context;
     ArrayList<Post> list;
+    String user;
     private DatabaseReference reactionRefs;
     private DatabaseReference postRef;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseUser currentUser = auth.getCurrentUser();
-    String user = currentUser.getUid();
 
     boolean processLike = false;
 
 
-    public PostAdapter(Context context, ArrayList<Post> list) {
+    public PostAdapter(Context context, ArrayList<Post> list,String user) {
         this.context = context;
         this.list = list;
+        this.user = user;
         reactionRefs = FirebaseDatabase.getInstance().getReference().child("Reaction");
         postRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
@@ -64,39 +64,54 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.upVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int pReaction = Integer.parseInt(list.get(holder.getAdapterPosition()).getReaction());
-                processLike = true;
-                final String postId = list.get(holder.getAdapterPosition()).getId();
-                reactionRefs.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(processLike){
-                            if(snapshot.child(postId).child(user).getValue() == "DOWNVOTE"){
-                                postRef.child(postId).child("reaction").setValue("" +(pReaction+2));
-                                reactionRefs.child(postId).child(user).setValue("UPVOTE");
-                                processLike = false;
-                            }else if(snapshot.child(postId).child(user).getValue() == "UPVOTE"){
-                                postRef.child(postId).child("reaction").setValue("" +(pReaction-1));
-                                reactionRefs.child(postId).child(user).removeValue();
-                                processLike = false;
-                            }
-                            else{
-                                postRef.child(postId).child("reaction").setValue("" +(pReaction+1));
-                                reactionRefs.child(postId).child(user).setValue("UPVOTE");
-                                processLike = false;
+                if(user.equals("guest")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setCancelable(true);
+                    builder.setTitle("Please login");
+                    builder.setMessage("If you want to use this function you need to log in first");
+                    builder.show();
+                }else {
+                    final int pReaction = Integer.parseInt(list.get(holder.getAdapterPosition()).getReaction());
+                    processLike = true;
+                    final String postId = list.get(holder.getAdapterPosition()).getId();
+                    reactionRefs.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (processLike) {
+                                if (snapshot.child(postId).child(user).getValue() == "DOWNVOTE") {
+                                    postRef.child(postId).child("reaction").setValue("" + (pReaction + 2));
+                                    reactionRefs.child(postId).child(user).setValue("UPVOTE");
+                                    processLike = false;
+                                } else if (snapshot.child(postId).child(user).getValue() == "UPVOTE") {
+                                    postRef.child(postId).child("reaction").setValue("" + (pReaction - 1));
+                                    reactionRefs.child(postId).child(user).removeValue();
+                                    processLike = false;
+                                } else {
+                                    postRef.child(postId).child("reaction").setValue("" + (pReaction + 1));
+                                    reactionRefs.child(postId).child(user).setValue("UPVOTE");
+                                    processLike = false;
+                                }
                             }
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                })
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
 ;            }
         });
         holder.downVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user.equals("guest")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setCancelable(true);
+                    builder.setTitle("Please login");
+                    builder.setMessage("If you want to use this function you need to log in first");
+                    builder.show();
+                }else {
                 final int pReaction = Integer.parseInt(list.get(holder.getAdapterPosition()).getReaction());
                 processLike = true;
                 final String postId = list.get(holder.getAdapterPosition()).getId();
@@ -125,7 +140,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
                     }
                 });
-            }
+            }}
         });
     }
     private void setReaction(final PostViewHolder holder,final String postId) {
@@ -142,9 +157,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     holder.downVote.setText("DownVote");
 
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

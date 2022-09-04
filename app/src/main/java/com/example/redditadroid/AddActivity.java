@@ -80,7 +80,7 @@ public class AddActivity extends AppCompatActivity {
                         .setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        reactionReference.child(id).child(user).setValue("Liked");
+                        reactionReference.child(id).child(user).setValue("UPVOTE");
 
 
                         Toast.makeText(AddActivity.this,"Post crated",Toast.LENGTH_LONG).show();

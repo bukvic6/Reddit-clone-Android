@@ -22,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 public class AddCommunityActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = db.getReference("Communities");
@@ -60,8 +63,10 @@ public class AddCommunityActivity extends AppCompatActivity {
                     Toast.makeText(AddCommunityActivity.this, "Description must be minimum 8 characters", Toast.LENGTH_LONG).show();
                     return;
                 }
+                Calendar calendar = Calendar.getInstance();
+                String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
                 String id = databaseReference.push().getKey();
-                Community community = new Community(id,name, description, user);
+                Community community = new Community(id,name, description, user,dateNow);
                 FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Communities").child(community.getId())
                         .setValue(community).addOnSuccessListener(new OnSuccessListener<Void>() {
                             

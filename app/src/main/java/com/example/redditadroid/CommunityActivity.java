@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.redditadroid.model.Post;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,9 @@ public class CommunityActivity extends AppCompatActivity {
     ArrayList<Post> list;
     RecyclerView recyclerView;
     DatabaseReference database;
+    private FirebaseAuth auth;
+    String user;
+
 
 
 
@@ -37,6 +42,18 @@ public class CommunityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_community);
         String name = getIntent().getStringExtra("NAME");
         String id = getIntent().getStringExtra("ID");
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+//        if (currentUser == null){
+//            Intent intent = new Intent(this, Login_form.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
+        user = "guest";
+        if (currentUser != null){
+            user = currentUser.getUid();
+        }
 
         TextView nametext = findViewById(R.id.CommName);
         nametext.setText(name);
@@ -72,7 +89,7 @@ public class CommunityActivity extends AppCompatActivity {
                     Post post = dataSnapshot.getValue(Post.class);
                     list.add(post);
                 }
-                postAdapter = new PostAdapter(CommunityActivity.this, list);
+                postAdapter = new PostAdapter(CommunityActivity.this, list,user);
                 recyclerView.setAdapter(postAdapter);
             }
 

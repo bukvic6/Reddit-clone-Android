@@ -2,6 +2,7 @@ package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     PostAdapter postAdapter;
     ArrayList<Post> list;
     ActionBar actionBar;
-    Button createpost;
+    String user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +45,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
-        if (currentUser == null){
-            Intent intent = new Intent(this, Login_form.class);
-            startActivity(intent);
-            finish();
-            return;
+        user = "guest";
+
+
+        if(currentUser != null){
+            user = currentUser.getUid();
         }
 
         FirebaseDatabase databasef = FirebaseDatabase.getInstance();
-        DatabaseReference reference = databasef.getReference("users").child(currentUser.getUid());
-
+        DatabaseReference reference = databasef.getReference("users").child(user);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         //ACTION BAR
         actionBar = getSupportActionBar();
         actionBar.setTitle("Home");
@@ -74,12 +76,28 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.nav_comm:
-                    Intent i = new Intent(MainActivity.this, AddCommunityActivity.class);
-                    startActivity(i);
+                    if(user.equals("guest")){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setCancelable(true);
+                        builder.setTitle("Please login");
+                        builder.setMessage("If you want to use this function you need to log in first");
+                        builder.show();
+                    }else {
+                        Intent i = new Intent(MainActivity.this, AddCommunityActivity.class);
+                        startActivity(i);
+                    }
                     break;
                 case R.id.profile:
+                    if(user.equals("guest")){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setCancelable(true);
+                        builder.setTitle("Please login");
+                        builder.setMessage("If you want to use this function you need to log in first");
+                        builder.show();
+                    }else {
                     Intent f = new Intent(MainActivity.this, ProfileActivity.class);
                     startActivity(f);
+                    }
                     break;
                 case R.id.home:
                     Intent l = new Intent(MainActivity.this, ListCommunity.class);
@@ -97,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 auth.signOut();
+                user = "";
                 Intent i = new Intent(MainActivity.this, Login_form.class);
                 startActivity(i);
             }
@@ -121,13 +140,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        loadPosts();
+        loadPosts(user);
         usernameM = findViewById(R.id.mainUsername);
 
 
     }
 
-    private void loadPosts() {
+    private void loadPosts(String user) {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -136,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     Post post = dataSnapshot.getValue(Post.class);
                     list.add(post);
                 }
-                postAdapter = new PostAdapter(MainActivity.this, list);
+                postAdapter = new PostAdapter(MainActivity.this, list,user);
                 recyclerView.setAdapter(postAdapter);
             }
 

@@ -4,6 +4,15 @@ public class Community {
 
     String id;
     String name;
+    String creationDate;
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public String getId() {
         return id;
@@ -26,11 +35,12 @@ public class Community {
         this.description = description;
         this.userId = userId;
     }
-    public Community(String id,String name, String description, String userId) {
+    public Community(String id,String name, String description, String userId,String creationDate) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.userId = userId;
+        this.creationDate = creationDate;
     }
     public Community(){}
 
