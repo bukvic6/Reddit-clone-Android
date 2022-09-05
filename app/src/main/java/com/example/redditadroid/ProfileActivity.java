@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView greetingTextView,emailView,usernameView,karmaView;
+    private TextView displName,emailView,usernameView,karmaView;
     Button button;
     ActionBar actionBar;
     MyPostAdapter postAdapter;
@@ -44,9 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         String user = currentUser.getUid();
-        greetingTextView = findViewById(R.id.greeting);
         emailView = findViewById(R.id.emailAddress);
         usernameView = findViewById(R.id.username);
+        displName = findViewById(R.id.displayName);
         karmaView = findViewById(R.id.karma);
 
 
@@ -112,7 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(userProfile != null){
                     String email = userProfile.email;
                     String username = userProfile.username;
-                    greetingTextView.setText(userProfile.username);
+                    displName.setText(userProfile.displayName);
                     emailView.setText(email);
                     usernameView.setText(username);
                 }

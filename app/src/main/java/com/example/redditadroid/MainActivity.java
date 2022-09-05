@@ -59,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 if(user != null){
-                    usernameM.setText("Username: " + user.username);
+                if(user.displayName.equals("")){
+                        usernameM.setText("Username: " + user.username);
+
+                    }else{
+                    usernameM.setText("DisplayName: " + user.displayName);                    }
                 }
             }
 

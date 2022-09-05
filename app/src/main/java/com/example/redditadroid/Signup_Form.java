@@ -70,7 +70,9 @@ public class Signup_Form extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    User user = new User(username,email,password);
+                    String displayName = "";
+                    String description = "";
+                    User user = new User(username,email,password,displayName,description);
                     FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>(){

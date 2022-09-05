@@ -25,8 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    private EditText usernameEdit, emailEdit ,oldPassword, newPassword;
-    private String textUsername, textEmail, truOldPass,textOldPassword,textNewPass;
+    private EditText usernameEdit, emailEdit ,oldPassword, newPassword,displaynameEdit,profileDescEdit;
+    private String textUsername, textEmail, truOldPass,textOldPassword,textNewPass, displaynametext,profileDescText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class UpdateProfile extends AppCompatActivity {
         emailEdit = findViewById(R.id.editText_updateProfile_email);
         oldPassword = findViewById(R.id.oldPassword);
         newPassword = findViewById(R.id.newPassword);
+        displaynameEdit=findViewById(R.id.editText_updateProfile_displayName);
+        profileDescEdit=findViewById(R.id.editText_updateProfile_desc);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         showProfile(currentUser);
@@ -65,6 +67,9 @@ public class UpdateProfile extends AppCompatActivity {
             textEmail = emailEdit.getText().toString();
             textOldPassword = oldPassword.getText().toString();
             textNewPass = newPassword.getText().toString();
+            displaynametext = displaynameEdit.getText().toString();
+            profileDescText = profileDescEdit.getText().toString();
+
 
 
             if (textOldPassword.equals(truOldPass)){
@@ -77,7 +82,7 @@ public class UpdateProfile extends AppCompatActivity {
 
             DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
 
-            User write = new User(textUsername,textEmail,truOldPass);
+            User write = new User(textUsername,textEmail,truOldPass,displaynametext,profileDescText);
             reference.setValue(write).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -117,10 +122,14 @@ public class UpdateProfile extends AppCompatActivity {
                 textUsername = userProfile.username;
                 textEmail = userProfile.email;
                 truOldPass = userProfile.password;
+                displaynametext = userProfile.displayName;
+                profileDescText = userProfile.profileDesc;
 
 
                 emailEdit.setText(textEmail);
                 usernameEdit.setText(textUsername);
+                displaynameEdit.setText(displaynametext);
+                profileDescEdit.setText(profileDescText);
 
 
 

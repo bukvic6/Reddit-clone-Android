@@ -8,14 +8,6 @@
     tools:context=".ProfileActivity">
 
     <TextView
-        android:id="@+id/greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        />
-    <TextView
         android:id="@+id/emailAddressTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +21,7 @@
         android:id="@+id/emailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20sp"
         />
     <TextView
@@ -39,24 +31,42 @@
         android:text="Username:"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20sp"
         />
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20sp"
+        />
+    <TextView
+        android:id="@+id/textDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display name:"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20sp"
+        />
+    <TextView
+        android:id="@+id/displayName"
+        android:hint="Add displayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20sp"
         />
     <TextView
         android:id="@+id/carmatext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carma:"
+        android:text="Karma:"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20sp"
         />
     <TextView
