@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_post.xml" value="0.10967741935483871" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_update_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.17094017094017094" />
+        <entry key="app/src/main/res/layout/comment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/community.xml" value="0.1276595744680851" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/my_community.xml" value="0.22" />

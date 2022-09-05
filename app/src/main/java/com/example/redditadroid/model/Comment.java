@@ -1,6 +1,7 @@
 package com.example.redditadroid.model;
 
 public class Comment {
+    String id;
     String userId;
     String text;
     String postId;
@@ -9,11 +10,20 @@ public class Comment {
 
     }
 
-    public Comment(String userId, String text, String postId, String creationDate) {
+    public Comment(String id,String userId, String text, String postId, String creationDate) {
         this.userId = userId;
+        this.id = id;
         this.text = text;
         this.postId = postId;
         this.creationDate = creationDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {

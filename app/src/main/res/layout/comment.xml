@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="2dp"
+    android:layout_margin="1dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/picComment"
+            android:src="@drawable/loginlogo"/>
+
+        <TextView
+            android:id="@+id/commentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_toRightOf="@+id/picComment"
+            android:text="Username"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/creationDatecomment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commentName"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/picComment"
+            android:text="Creation Date"
+            android:textSize="9sp"
+            />
+
+        <TextView
+            android:id="@+id/commentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/creationDatecomment"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/picComment"
+            android:text="Comment text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

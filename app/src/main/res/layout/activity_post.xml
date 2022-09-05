@@ -7,6 +7,7 @@
     tools:context=".PostActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:layout_above="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,23 +15,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:cardElevation="8dp"
                 app:cardCornerRadius="8dp"
-                app:contentPadding="5dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="8dp"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="5dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
@@ -40,87 +45,95 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/postTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="20sp"
                                 android:text="Title"
-                                android:textColor="@color/black"/>
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
                             <TextView
-                                android:id="@+id/communityname"
+                                android:id="@+id/creationDate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="20sp"
-                                android:text="Communityname"
-                                />
+                                android:text="CreationDate"
+                                android:textSize="20sp" />
 
                         </LinearLayout>
 
 
-
-
-
-
                     </LinearLayout>
+
                     <TextView
                         android:id="@+id/postText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Title"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/btnUpvote"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:drawableLeft="@drawable/like"
-                            android:text="UPVOTE"
-                            android:textColor="@color/black"
                             android:drawablePadding="5dp"
-                            android:drawableStart="@drawable/like"
-                            />
+                            android:text="UPVOTE"
+                            android:textColor="@color/black" />
+
                         <TextView
                             android:id="@+id/reaction"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:text="200"
-                            />
+                            android:textSize="20sp" />
+
                         <Button
                             android:id="@+id/downVote"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:drawableLeft="@drawable/dislike"
-                            android:textColor="@color/black"
-                            android:text="DOWNVOTE"
                             android:drawablePadding="5dp"
-                            android:drawableStart="@drawable/dislike"
-                            />
+                            android:text="DOWNVOTE"
+                            android:textColor="@color/black" />
 
 
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/send"
+                android:text="Comments"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsView"
+                android:layout_width="408dp"
+                android:layout_height="371dp"/>
+
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
