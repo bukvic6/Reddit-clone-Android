@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddCommunityActivity extends AppCompatActivity {
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -98,8 +100,24 @@ public class AddCommunityActivity extends AppCompatActivity {
 
                     }
                 });
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+                DatabaseReference reference = database.getReference("users");
+                String role = "MODERATOR";
+                Map<String, Object> map = new HashMap<>();
+                map.put("role", role);
+                reference.child(user).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(AddCommunityActivity.this, "Success!", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddCommunityActivity.this, "Error", Toast.LENGTH_LONG).show();
 
+                    }
+                });
             }
         });
     }

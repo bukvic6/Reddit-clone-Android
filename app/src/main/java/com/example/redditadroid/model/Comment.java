@@ -35,6 +35,10 @@ public class Comment {
         this.creationDate = creationDate;
     }
 
+    public Comment(String reaction) {
+        this.reaction = reaction;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.example.redditadroid.model;
 
 public class User {
+    public String role;
     public String username;
     public String email;
     public String password;
@@ -16,6 +17,14 @@ public class User {
         this.displayName = displayName;
         this.profileDesc = profileDesc;
     }
+    public User(String username, String email, String password, String displayName, String profileDesc,String role) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.displayName = displayName;
+        this.profileDesc = profileDesc;
+        this.role = role;
+    }
 
     public String getProfileDesc() {
         return profileDesc;
@@ -28,6 +37,14 @@ public class User {
     public User(String textUsername, String textEmail) {
         this.username = textUsername;
         this.email = textEmail;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {

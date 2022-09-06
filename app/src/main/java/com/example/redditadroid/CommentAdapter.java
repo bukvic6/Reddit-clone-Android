@@ -64,9 +64,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         String commentUser = list.get(position).getUserId();
         String commentText = list.get(position).getText();
         String creationDate = list.get(position).getCreationDate();
+        String karma = list.get(position).getReaction();
         String postId = list.get(position).getPostId();
         final String cId = list.get(position).getId();
         holder.commentUser.setText(commentUser);
+        holder.reaction.setText(karma);
         holder.commentText.setText(commentText);
         holder.commentCreationDate.setText(creationDate);
         setReaction(holder, cId);
@@ -177,6 +179,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("comments").child(cId).child("comm2com");
                 String id = reference.push().getKey();
+
                 Comment comment1 = new Comment(id,user,comment,dateNow);
 
 
@@ -205,10 +208,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                 if (snapshot.child(postId).child(commentId).child(user).getValue()== "DOWNVOTE"){
                     holder.downVote.setText("DownVoted");
                 }else if(snapshot.child(postId).child(commentId).child(user).getValue()== "UPVOTE"){
-                    holder.upVote.setText("Liked");
+                    holder.upVote.setText("upvoted");
                 }
                 else {
-                    holder.upVote.setText("Like");
+                    holder.upVote.setText("UPVOTE");
                     holder.downVote.setText("DownVote");
 
                 }

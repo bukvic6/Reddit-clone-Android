@@ -80,13 +80,6 @@ public class Login_form extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    private void unloged(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user", "guest");
-
-        startActivity(intent);
-        finish();
-    }
     private void switchToRegisterForm(){
         Intent intent = new Intent(this, Signup_Form.class);
         startActivity(intent);

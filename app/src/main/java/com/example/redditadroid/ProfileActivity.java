@@ -2,6 +2,7 @@ package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView displName,emailView,usernameView,karmaView;
+    private TextView displName,emailView,usernameView,karmaView, profileDes;
     Button button;
     ActionBar actionBar;
     MyPostAdapter postAdapter;
@@ -45,7 +46,9 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseUser currentUser = auth.getCurrentUser();
         String user = currentUser.getUid();
         emailView = findViewById(R.id.emailAddress);
+        profileDes = findViewById(R.id.profileDesc);
         usernameView = findViewById(R.id.username);
+
         displName = findViewById(R.id.displayName);
         karmaView = findViewById(R.id.karma);
 
@@ -97,6 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
                     int total = Integer.parseInt(value);
                     sum = sum +total;
                 }
+
                 karmaView.setText(String.valueOf(sum));
             }
             @Override
@@ -104,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,9 +117,12 @@ public class ProfileActivity extends AppCompatActivity {
                 if(userProfile != null){
                     String email = userProfile.email;
                     String username = userProfile.username;
+                    String desc = userProfile.profileDesc;
                     displName.setText(userProfile.displayName);
                     emailView.setText(email);
                     usernameView.setText(username);
+                    profileDes.setText(desc);
+
                 }
             }
 
@@ -126,6 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
     private void loadPosts(String id) {
         Query query = database.orderByChild("userId").equalTo(id);
         query.addValueEventListener(new ValueEventListener() {

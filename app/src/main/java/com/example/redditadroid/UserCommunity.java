@@ -1,10 +1,12 @@
 package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.redditadroid.model.Community;
@@ -54,9 +56,12 @@ public class UserCommunity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Community community = dataSnapshot.getValue(Community.class);
                     list.add(community);
+
                 }
-                communityAdapter = new MyCommunityAdapter(UserCommunity.this, list);
-                recyclerView.setAdapter(communityAdapter);
+                    communityAdapter = new MyCommunityAdapter(UserCommunity.this, list);
+                    recyclerView.setAdapter(communityAdapter);
+
+
             }
 
             @Override

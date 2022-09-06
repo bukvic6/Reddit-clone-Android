@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,34 +102,55 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void postComment() {
-        String comment = commentAdd.getText().toString();
-        if(TextUtils.isEmpty(comment)){
-            Toast.makeText(this, "Comment is empty", Toast.LENGTH_LONG).show();
-            return;
+        if(user.equals("guest")){
+            AlertDialog.Builder builder = new AlertDialog.Builder(PostActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Please login");
+            builder.setMessage("If you want to use this function you need to log in first");
+            builder.show();
+
+        } else{
+            String comment = commentAdd.getText().toString();
+            if(TextUtils.isEmpty(comment)){
+                Toast.makeText(this, "Comment is empty", Toast.LENGTH_LONG).show();
+                return;
+            }
+            Calendar calendar = Calendar.getInstance();
+            String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("comments");
+            String id = reference.push().getKey();
+            String reaction = "1";
+            Comment comment1 = new Comment(id,user,comment,postId,dateNow, reaction);
+            DatabaseReference postCheat = FirebaseDatabase.getInstance().getReference("commCheat").child(user).child("comments");
+
+            String idCheat = postCheat.push().getKey();
+            Comment commentcheat = new Comment(reaction);
+            postCheat.child(idCheat).setValue(commentcheat).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(PostActivity.this, "added", Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+            reference.child(id).setValue(comment1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    reactionReference.child(id).child(user).setValue("UPVOTE");
+                    Toast.makeText(PostActivity.this, "Comment added", Toast.LENGTH_LONG).show();
+
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(PostActivity.this, "oh nouz", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
         }
-        Calendar calendar = Calendar.getInstance();
-        String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("comments");
-        String id = reference.push().getKey();
-        String reaction = "1";
-        Comment comment1 = new Comment(id,user,comment,postId,dateNow, reaction);
 
-
-        reference.child(id).setValue(comment1).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                reactionReference.child(id).child(user).setValue("UPVOTE");
-                Toast.makeText(PostActivity.this, "Comment added", Toast.LENGTH_LONG).show();
-
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(PostActivity.this, "oh nouz", Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 
     private void loadComments() {

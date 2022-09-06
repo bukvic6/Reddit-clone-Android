@@ -5,12 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditadroid.model.Comment;
+import com.example.redditadroid.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -37,6 +43,34 @@ public class Post2postAdapter extends RecyclerView.Adapter<Post2postAdapter.Post
         String commentText = list.get(position).getText();
         holder.commentUser.setText(commentUser);
         holder.commentText.setText(commentText);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference reference = database.getReference("users").child(commentUser);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                User userProfile = snapshot.getValue(User.class);
+                if(userProfile != null){
+
+                    String username = userProfile.username;
+                    String displayName = userProfile.displayName;
+                    if(displayName.equals("")){
+                        holder.commentUser.setText(username);
+                    }else {
+                        holder.commentUser.setText(displayName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context,"something wrong happened", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     @Override

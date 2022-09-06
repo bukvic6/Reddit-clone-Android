@@ -3,6 +3,7 @@ package com.example.redditadroid;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -72,14 +73,17 @@ public class Signup_Form extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     String displayName = "";
                     String description = "";
-                    User user = new User(username,email,password,displayName,description);
+                    String role = "KORISNIK";
+                    User user = new User(username,email,password,displayName,description, role);
                     FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>(){
                                 @Override
-                        public void onComplete(@NonNull Task<Void> task){
-                          showMainActivity();
-                    }});
+                                public void onComplete(@NonNull Task<Void> task){
+                                            Intent intent = new Intent(Signup_Form.this, Login_form.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }});
                 } else {
                     Toast.makeText(Signup_Form.this, "Authentication failed.",
                             Toast.LENGTH_LONG).show();
