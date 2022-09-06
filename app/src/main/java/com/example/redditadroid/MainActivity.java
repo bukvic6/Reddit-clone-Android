@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.redditadroid.model.Post;
 import com.example.redditadroid.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference database;
     PostAdapter postAdapter;
     ArrayList<Post> list;
-    ActionBar actionBar;
+    ActionBar actionBar,topBar;
+
     String user;
 
 
@@ -72,14 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        //ACTION BAR
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Home");
-        BottomNavigationView navigationView = findViewById(R.id.navigation);
-        navigationView.setOnItemSelectedListener(item -> {
+        topBar = getSupportActionBar();
+        topBar.setTitle("Top");
+        BottomNavigationView navView = findViewById(R.id.navtop);
+        navView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.nav_comm:
+                case R.id.addCommunity:
                     if(user.equals("guest")){
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setCancelable(true);
@@ -91,6 +91,24 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                     break;
+                case R.id.logout:
+                    auth.signOut();
+                    user = "";
+                    Intent i = new Intent(MainActivity.this, Login_form.class);
+                    startActivity(i);
+                    break;
+            }
+            return true;
+
+
+        });
+
+        //ACTION BAR
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Home");
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        navigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
                 case R.id.profile:
                     if(user.equals("guest")){
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -103,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(f);
                     }
                     break;
-                case R.id.home:
+                case R.id.communitieList:
                     Intent l = new Intent(MainActivity.this, ListCommunity.class);
                     startActivity(l);
                     break;
@@ -113,32 +131,31 @@ public class MainActivity extends AppCompatActivity {
 
         });
         //TOP BAR
+//        Button logout = findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                auth.signOut();
+//                user = "";
+//                Intent i = new Intent(MainActivity.this, Login_form.class);
+//                startActivity(i);
+//            }
+//        });
 
-        Button logout = findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                user = "";
-                Intent i = new Intent(MainActivity.this, Login_form.class);
-                startActivity(i);
-            }
-        });
-
-        Button createCommunity = findViewById(R.id.addCommunity);
-        createCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, AddCommunityActivity.class);
-                startActivity(i);            }
-        });
-        Button userProfile = findViewById(R.id.userProfile);
-        userProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(i);            }
-        });
+//        Button createCommunity = findViewById(R.id.addCommunity);
+//        createCommunity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, AddCommunityActivity.class);
+//                startActivity(i);            }
+//        });
+//        Button userProfile = findViewById(R.id.userProfile);
+//        userProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+//                startActivity(i);            }
+//        });
         recyclerView = findViewById(R.id.postList);
         database = FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts");
         recyclerView.setHasFixedSize(true);

@@ -15,12 +15,32 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
     <Button
+        android:drawableLeft="@drawable/add"
         android:id="@+id/addPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="addPost"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Community rules:"
+        android:gravity="left"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
+    <TextView
+        android:id="@+id/communityRules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Community rules"
+        android:minHeight="200dp"
+        android:gravity="start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postList"
         android:layout_width="match_parent"

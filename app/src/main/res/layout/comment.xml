@@ -12,7 +12,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/picComment"
-            android:src="@drawable/loginlogo"/>
+            android:src="@drawable/rebbitlogo"/>
 
         <TextView
             android:id="@+id/commentName"

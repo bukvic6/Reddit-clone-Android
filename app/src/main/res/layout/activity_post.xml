@@ -40,7 +40,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/loginlogo" />
+                            android:src="@drawable/rebbitlogo" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -139,18 +139,24 @@
         android:layout_alignParentBottom="true">
 
         <ImageView
+            android:id="@+id/imgLogo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="1dp"
-            android:id="@+id/imgLogo"
-            android:src="@drawable/loginlogo"/>
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:src="@drawable/rebbitlogo" />
+
         <EditText
             android:id="@+id/commentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_toEndOf="@+id/imgLogo"
-            android:hint="Enter comment"
-            android:layout_margin="1dp"/>
+            android:hint="Enter comment" />
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

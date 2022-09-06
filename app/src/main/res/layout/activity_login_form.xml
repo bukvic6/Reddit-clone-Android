@@ -11,14 +11,14 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/loginlogo"
+        android:src="@drawable/rebbitlogo"
         android:layout_marginTop="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textColor="#E94B1B"
+        android:text="@string/REBBIT"
+        android:textColor="#6b0f34"
         android:textSize="45dp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"/>
@@ -67,16 +67,16 @@
         android:layout_height="wrap_content"
         android:text="Create a new account"
         android:layout_marginTop="30dp"
-        android:textColor="#E94B1B"
+        android:textColor="#d64b83"
         android:textStyle="bold"
         android:textSize="16dp"/>
     <TextView
         android:id="@+id/switchToMainPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue without account"
+        android:text="Continue without Login"
         android:layout_marginTop="30dp"
-        android:textColor="#E94B1B"
+        android:textColor="#d64b83"
         android:textStyle="bold"
         android:textSize="16dp"/>
 </LinearLayout>

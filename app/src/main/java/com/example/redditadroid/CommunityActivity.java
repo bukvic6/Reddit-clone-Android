@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.redditadroid.model.Post;
+import com.example.redditadroid.model.Rules;
+import com.example.redditadroid.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +59,35 @@ public class CommunityActivity extends AppCompatActivity {
 
         TextView nametext = findViewById(R.id.CommName);
         nametext.setText(name);
+        TextView communityRules = findViewById(R.id.communityRules);
+
+
+
+        //VALUE TO RULES
+
+        FirebaseDatabase rules = FirebaseDatabase.getInstance();
+
+        DatabaseReference reference = rules.getReference("Rules").child(id);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Rules rules = snapshot.getValue(Rules.class);
+                if(rules != null){
+                    String desc = rules.getDescription();
+                    communityRules.setText(desc);
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(CommunityActivity.this,"something wrong happened", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
         recyclerView = findViewById(R.id.postList);
         database = FirebaseDatabase.getInstance("https://redditadroid-default-rtdb.firebaseio.com/").getReference("Posts");
         recyclerView.setHasFixedSize(true);

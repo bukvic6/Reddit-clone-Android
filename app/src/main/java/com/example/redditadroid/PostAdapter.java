@@ -60,7 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.text.setText(text);
         holder.title.setText(title);
         holder.reaction.setText(reaction);
-        setReaction(holder, pId);
+        //setReaction(holder, pId);
 
         holder.upVote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,15 +157,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         reactionRefs.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(postId).child(user).getValue() == "Dislike"){
-                    holder.downVote.setText("DownVoted");
-                }else if(snapshot.child(postId).child(user).getValue() == "Liked"){
-                    holder.upVote.setText("Liked");
+                if (snapshot.child(postId).hasChild(user)) {
+                    holder.downVote.setText("DOWNVOTED");
+//                }else if(snapshot.child(postId).child(user).getValue() == "UPVOTE"){
+////                    holder.upVote.setText("UPVOTED");
+//                }
                 }
-                else {
-                    holder.upVote.setText("Like");
-                    holder.downVote.setText("DownVote");
-
+                else{
+                    holder.upVote.setText("ISPRAVITI");
                 }
             }
             @Override

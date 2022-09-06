@@ -19,7 +19,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/loginlogo" />
+                android:src="@drawable/rebbitlogo" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -100,17 +100,19 @@
                 android:background="@android:color/transparent"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:text="delete"
                 android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/delete"
+
                 />
             <Button
                 android:id="@+id/updatePost"
                 android:layout_width="wrap_content"
+                android:drawableLeft="@drawable/settings"
+
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:text="delete"
                 android:drawablePadding="5dp"
                 />
         </LinearLayout>

@@ -1,62 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log out"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            />
-        <Button
-            android:id="@+id/userProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Profile"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            />
-        <Button
-            android:id="@+id/addCommunity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add community"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            />
-
-
-
-    </LinearLayout>
-        <TextView
-            android:id="@+id/mainUsername"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navtop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome user:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            app:menu="@menu/top_nav">
+</com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/postList"
+
+    <TextView
+        android:id="@+id/mainUsername"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-        <TextView
-            android:id="@+id/AlertTextView"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navtop"
+        android:text="Welcome user:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relative"
+        android:layout_below="@+id/mainUsername">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Alert Recieved"
-            android:visibility="invisible"/>
+            android:layout_height="match_parent" />
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relative"
+        android:layout_alignParentBottom="true">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
@@ -66,10 +51,8 @@
             app:menu="@menu/menu_nav">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-     </LinearLayout>
-
+    </RelativeLayout>
 
 
 
-</LinearLayout>
+    </RelativeLayout>

@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-anydpi/delete.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/dislike.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.198" />
+        <entry key="app/src/main/res/drawable-anydpi/rebbitLogo.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-anydpi/rebbitlogo.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/send.xml" value="0.1045" />
+        <entry key="app/src/main/res/drawable-anydpi/setting.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/add.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.2675" />
@@ -15,13 +19,13 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_community.xml" value="0.11018518518518519" />
-        <entry key="app/src/main/res/layout/activity_community.xml" value="0.2625" />
+        <entry key="app/src/main/res/layout/activity_community.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_community_list.xml" value="0.12685185185185185" />
-        <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.1276595744680851" />
-        <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/layout/activity_post.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sec.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_signup_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_update_community.xml" value="0.1" />
@@ -29,7 +33,7 @@
         <entry key="app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_community.xml" value="0.17094017094017094" />
         <entry key="app/src/main/res/layout/comment.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/community.xml" value="0.1276595744680851" />
+        <entry key="app/src/main/res/layout/community.xml" value="0.2" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/my_community.xml" value="0.22" />
         <entry key="app/src/main/res/layout/my_post.xml" value="0.2" />
@@ -39,6 +43,7 @@
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.18" />
         <entry key="app/src/main/res/menu/menu_nav.xml" value="0.1" />
         <entry key="app/src/main/res/menu/profile_nav.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/top_nav.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.105" />
       </map>
     </option>
