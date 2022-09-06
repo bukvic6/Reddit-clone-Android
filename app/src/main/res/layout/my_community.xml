@@ -46,6 +46,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:text="delete"
+                android:drawableLeft="@drawable/delete"
                 android:drawablePadding="5dp"
                 />
             <Button
@@ -56,6 +57,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/black"
                 android:text="Update"
+                android:drawableLeft="@drawable/settings"
                 android:drawablePadding="5dp"
                 />
 

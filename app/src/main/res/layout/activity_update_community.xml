@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/create"
+            android:text="update"
             android:backgroundTint="@color/design_default_color_primary"
             />
 

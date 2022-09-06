@@ -109,7 +109,7 @@ public class AddCommunityActivity extends AppCompatActivity {
                 reference.child(user).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(AddCommunityActivity.this, "Success!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AddCommunityActivity.this, "Success! You own community", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
