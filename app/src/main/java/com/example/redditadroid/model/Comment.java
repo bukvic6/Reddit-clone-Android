@@ -6,15 +6,25 @@ public class Comment {
     String text;
     String postId;
     String creationDate;
+    String reaction;
     public Comment(){
 
     }
 
-    public Comment(String id,String userId, String text, String postId, String creationDate) {
+    public String getReaction() {
+        return reaction;
+    }
+
+    public void setReaction(String reaction) {
+        this.reaction = reaction;
+    }
+
+    public Comment(String id, String userId, String text, String postId, String creationDate, String reaction) {
         this.userId = userId;
         this.id = id;
         this.text = text;
         this.postId = postId;
+        this.reaction = reaction;
         this.creationDate = creationDate;
     }
 

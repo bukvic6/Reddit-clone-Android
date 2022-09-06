@@ -36,6 +36,8 @@ public class PostActivity extends AppCompatActivity {
     private ImageButton sendComment;
     RecyclerView recyclerView;
     CommentAdapter commentAdapter;
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference reactionReference  = db.getReference("ReactionComment");
     ArrayList<Comment> list;
     private TextView textPost,titlePost, creationDatePost,karmaPost;
     String postId;
@@ -108,12 +110,14 @@ public class PostActivity extends AppCompatActivity {
         String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("comments");
         String id = reference.push().getKey();
-        Comment comment1 = new Comment(id,user,comment,postId,dateNow);
+        String reaction = "1";
+        Comment comment1 = new Comment(id,user,comment,postId,dateNow, reaction);
 
 
         reference.child(id).setValue(comment1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                reactionReference.child(id).child(user).setValue("UPVOTE");
                 Toast.makeText(PostActivity.this, "Comment added", Toast.LENGTH_LONG).show();
 
 
@@ -141,7 +145,7 @@ public class PostActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Comment comment = dataSnapshot.getValue(Comment.class);
                     list.add(comment);
-                    commentAdapter = new CommentAdapter(PostActivity.this,list);
+                    commentAdapter = new CommentAdapter(PostActivity.this,list,user);
                     recyclerView.setAdapter(commentAdapter);
                 }
             }
