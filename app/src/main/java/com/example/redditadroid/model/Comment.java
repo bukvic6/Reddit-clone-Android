@@ -28,6 +28,13 @@ public class Comment {
         this.creationDate = creationDate;
     }
 
+    public Comment(String id, String userId, String text, String creationDate) {
+        this.id = id;
+        this.userId = userId;
+        this.text = text;
+        this.creationDate = creationDate;
+    }
+
     public String getId() {
         return id;
     }

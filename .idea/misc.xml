@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2958199356913183" />
         <entry key="app/src/main/res/drawable-anydpi/delete.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/dislike.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.198" />
@@ -21,6 +22,7 @@
         <entry key="app/src/main/res/layout/activity_add_community.xml" value="0.11018518518518519" />
         <entry key="app/src/main/res/layout/activity_community.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_community_list.xml" value="0.12685185185185185" />
+        <entry key="app/src/main/res/layout/activity_detail_comment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_list_community.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_login_form.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
@@ -40,6 +42,7 @@
         <entry key="app/src/main/res/layout/post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/post_comments.xml" value="0.1" />
         <entry key="app/src/main/res/layout/registration.xml" value="0.1276595744680851" />
+        <entry key="app/src/main/res/layout/second_comment.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.18" />
         <entry key="app/src/main/res/menu/menu_nav.xml" value="0.1" />
         <entry key="app/src/main/res/menu/profile_nav.xml" value="0.1" />

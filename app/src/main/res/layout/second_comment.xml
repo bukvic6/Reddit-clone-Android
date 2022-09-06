@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="2dp"
+    android:layout_margin="1dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/picComment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/rebbitlogo" />
+
+        <TextView
+            android:id="@+id/com2comName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_toRightOf="@+id/picComment"
+            android:text="Username"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/com2comText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/com2comName"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/picComment"
+            android:text="Comment text"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,25 +1,35 @@
 package com.example.redditadroid;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditadroid.model.Comment;
+import com.example.redditadroid.model.Post;
 import com.example.redditadroid.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
@@ -39,6 +49,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         this.user = user;
         reactCommentRef = FirebaseDatabase.getInstance().getReference().child("ReactionComment");
         commentRefs = FirebaseDatabase.getInstance().getReference().child("Posts");
+
     }
 
     @NonNull
@@ -143,8 +154,47 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
                     });
                 }}
         });
+        holder.details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailComment.class);
+                intent.putExtra("commentId", cId);
+                intent.putExtra("postId", postId);
+                context.startActivity(intent);
+
+            }
+        });
+        holder.sendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comment = holder.commToComm.getText().toString();
+
+                if(TextUtils.isEmpty(comment)){
+                    Toast.makeText(context, "Comment is empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Calendar calendar = Calendar.getInstance();
+                String dateNow = DateFormat.getDateInstance().format(calendar.getTime());
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("comments").child(cId).child("comm2com");
+                String id = reference.push().getKey();
+                Comment comment1 = new Comment(id,user,comment,dateNow);
 
 
+                reference.child(id).setValue(comment1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(context, "Comment added", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "oh nouz", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+            }
+        });
     }
     private void setReaction(final CommentViewHolder holder, final String postId) {
         final String commentId = list.get(holder.getAdapterPosition()).getId();
@@ -201,19 +251,28 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     class CommentViewHolder extends RecyclerView.ViewHolder{
-        TextView commentUser,commentText,commentCreationDate, reaction;
-        Button upVote,downVote, comm;
+
+        //FIRST LIST
+        TextView commentUser,commentText,commentCreationDate, reaction, commToComm;
+        Button upVote,downVote, comm,details;
+        private ImageButton sendComment;
+
+
+
 
         public CommentViewHolder(@NonNull View itemView){
             super(itemView);
             commentUser = itemView.findViewById(R.id.commentName);
             commentText = itemView.findViewById(R.id.commentText);
             commentCreationDate = itemView.findViewById(R.id.creationDatecomment);
-
             reaction = itemView.findViewById(R.id.reaction);
             upVote = itemView.findViewById(R.id.btnUpvote);
             downVote = itemView.findViewById(R.id.downVote);
             comm = itemView.findViewById(R.id.comments);
+            details = itemView.findViewById(R.id.details);
+            sendComment = itemView.findViewById(R.id.sendCommentcoment);
+            commToComm = itemView.findViewById(R.id.commentToComment);
+
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.redditadroid;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,9 +102,17 @@ public class CommunityActivity extends AppCompatActivity {
         createPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CommunityActivity.this, AddActivity.class);
-                i.putExtra("ID", id);
-                startActivity(i);
+                if(user.equals("guest")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CommunityActivity.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Please login");
+                    builder.setMessage("If you want to use this function you need to log in first");
+                    builder.show();
+                }else {
+                    Intent i = new Intent(CommunityActivity.this, AddActivity.class);
+                    i.putExtra("ID", id);
+                    startActivity(i);
+                }
             }
         });
 

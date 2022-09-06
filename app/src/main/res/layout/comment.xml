@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp">
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -23,7 +23,6 @@
             android:text="Username"
             android:textSize="15sp"
             android:textStyle="bold" />
-
         <TextView
             android:id="@+id/creationDatecomment"
             android:layout_width="match_parent"
@@ -51,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/commentText"
+            android:id="@+id/buttonslayout"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -81,13 +81,54 @@
                 android:drawableLeft="@drawable/dislike"
                 android:drawablePadding="5dp"
                 android:text="DOWNVOTE"
+                android:textColor="@color/black"/>
+            <Button
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/settings"
+                android:drawablePadding="5dp"
                 android:textColor="@color/black" />
-
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonslayout">
 
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:src="@drawable/rebbitlogo" />
 
+            <EditText
+                android:id="@+id/commentToComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_toEndOf="@+id/imgLogo"
+                android:hint="Enter comment" />
+
+            <ImageButton
+                android:id="@+id/sendCommentcoment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:src="@drawable/send" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
